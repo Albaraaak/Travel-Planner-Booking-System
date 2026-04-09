@@ -8,41 +8,44 @@ A full-stack travel and booking web application that allows users to explore des
 ## ✨ Features
 
 
-- 🔐 User Authentication (Login / Signup)  
-- 🧭 Browse destinations by continent and country  
-- 📦 View travel packages with detailed information  
-- ⭐ Explore Best Picks (restaurants, cafés, tourism places)  
-- 🛒 Booking system with checkout functionality  
-- 📄 Product details page  
-- ❤️ Add and manage favorites  
-- 👤 User profile management  
-- 📞 Contact section on Home page  
-- 🔍 Search and filter functionality  
-- 📱 Fully responsive design  
+- 🔐 **User Authentication** (Login / Signup)  
+- 🧭 **Browse destinations** by continents and countries
+- 📦 **View travel packages** with detailed information  
+- ⭐ **Explore Best Picks** - (restaurants, cafés, tourism places)
+- 🛒 **Booking system with checkout functionality**  
+- 📄 **Product details page**  
+- ❤️ **Add and manage favorites**  
+- 👤 **User profile management**  
+- 📞 **Contact section**  in Footer section   
+- 🔍 **Search and filter functionality**  
+- 📱 **Fully responsive design**  
 
 
 
 ## 🛠️ Technologies
-- 🎨 Frontend: HTML, CSS, JavaScript, React  
-- ⚙️ Backend: Node.js, Express.js  
-- 🗄️ Database: MongoDB  
-- 🔗 API: REST API  
-- 🧰 Tools: Git, VS Code  
-- 📡 Libraries: Axios, React Router  
+- 🎨 _Frontend_: HTML, CSS, JavaScript, React  
+- ⚙️  _Backend_: Node.js, Express.js  
+- 🗄️  _Database_: MongoDB  
+- 🔗  _API_: REST API  
+- 🧰  _Tools_: Git, VS Code  
+- 📡  _Libraries_: Axios, React Router  
 
 
 
 ### ⚙️Installation 
+
 
 1. Clone the repository
 ```bash
 git clone https://github.com/yourusername/repo-name.git
 ```
 
+
 2. Navigate to project directory
 ```bash
 cd repo-name
 ```
+
 
 3. Install dependencies
 ```bash
@@ -50,26 +53,30 @@ npm install
 
 ```
 
+
 4. Start the development server
 ```bash
 npm run dev
 ```
 
+
 5. Open (http://localhost:5173) in your browser
+
 
 
 
 ## ▶️ Usage
 
-- 🌐 Open the application in your browser  
-- 🧭 Navigate through pages  
-- 🌍 Browse destinations by continents & countries
-- 📦 Select a package to view details  
-- 🛒 Book a trip and proceed to checkout  
-- ⭐ Explore Best Picks for recommendations  
-- ❤️ Save items to favorites  
-- 👤 Manage your profile  
-- 📞 Use contact section to reach out
+
+- 🌐 **Open the application in your browser**
+- 🧭 **Navigate through pages**
+- 🌍 **Browse destination**s by continents & countries
+- 📦 **Select a package** to view details
+- 🛒 **Book a trip** and proceed to checkout
+- ⭐ **Explore Best Picks** for recommendations
+- ❤️ **Save items** to favorites
+- 👤 **Manage your profile**  
+- 📞 **Use contact section** to reach out
 
 
   
@@ -80,14 +87,15 @@ It focuses on building a real-world travel platform that combines frontend desig
 
 
 ### 🤝 Contributing
-*bold** Contributions are welcome! Feel free to open issues or submit a pull request.
+Contributions are welcome! Feel free to open issues or submit a pull request.
 
 
 ###  📜 License
-*bold** This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 
 
-# 📬 Contact
-Email:baraaabk1234@gmail.com
-Project Link: https://github.com/Albaraaak/Travel-Planner-Booking-System
+## 📬 Contact
+📧 **Email:baraaabk1234@gmail.com**
+
+🔗 **Project Link: https://github.com/Albaraaak/Travel-Planner-Booking-System**
