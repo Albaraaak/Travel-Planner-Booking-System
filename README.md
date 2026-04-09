@@ -4,8 +4,6 @@
 
 A full-stack travel and booking web application that allows users to explore destinations, view travel packages, and make bookings easily and efficiently. The platform is designed to provide a smooth user experience with dynamic content, responsive design, and secure data handling.
 
-
-
 ## ✨ Features  
 
 
@@ -32,9 +30,7 @@ A full-stack travel and booking web application that allows users to explore des
 
 - 📱 **Fully responsive design**  
 
-
-
-## 🛠️ Technologies 
+### 🛠️ Technologies 
 
 
 
@@ -49,11 +45,8 @@ A full-stack travel and booking web application that allows users to explore des
 - 🧰  _Tools_: Git, VS Code
  
 - 📡  _Libraries_: Axios, React Router
-  
 
-
-
-### ⚙️Installation 
+#### ⚙️Installation 
 
 
 
@@ -84,14 +77,6 @@ npm run dev
 
 5. Open http://localhost:5173 in your browser
 
-
-
-
-
-
-
-
-
 ## ▶️ Usage 
 
 
@@ -114,30 +99,27 @@ npm run dev
   
 - 📞 **Use contact section** to reach out
 
+### 🎯 Purpose 
 
-  
-## 🎯 Purpose 
 
 
 This project is built as part of a full-stack learning journey.
 It focuses on building a real-world travel platform that combines frontend design with backend functionality and database management.
 
-
-
 ### 🤝 Contributing 
+
 
 
 Contributions are welcome! Feel free to open issues or submit a pull request.
 
-
 ###  📜 License 
+
 
 
 This project is licensed under the **MIT License**.
 
-
-
 ### 📬 Contact 
+
 
 
 📧 **Email:baraaabk1234@gmail.com**
