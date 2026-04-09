@@ -8,16 +8,26 @@ A full-stack travel and booking web application that allows users to explore des
 ## ✨ Features  
 
 
-- 🔐 **User Authentication** (Login / Signup)  
+- 🔐 **User Authentication** (Login / Signup)
+ 
 - 🧭 **Browse destinations** by continents and countries
-- 📦 **View travel packages** with detailed information  
+ 
+- 📦 **View travel packages** with detailed information
+ 
 - ⭐ **Explore Best Picks** - (restaurants, cafés, tourism places)
-- 🛒 **Booking system with checkout functionality**  
-- 📄 **Product details page**  
-- ❤️ **Add and manage favorites**  
-- 👤 **User profile management**  
-- 📞 **Contact section**  in Footer section   
-- 🔍 **Search and filter functionality**  
+
+- 🛒 **Booking system with checkout functionality**
+  
+- 📄 **Product details page**
+  
+- ❤️ **Add and manage favorites**
+    
+- 👤 **User profile management**
+   
+- 📞 **Contact section**  in Footer section
+    
+- 🔍 **Search and filter functionality**
+
 - 📱 **Fully responsive design**  
 
 
@@ -95,7 +105,7 @@ This project is licensed under the **MIT License**.
 
 
 
-## 📬 Contact 
+### 📬 Contact 
 📧 **Email:baraaabk1234@gmail.com**
 
 🔗 **Project Link: https://github.com/Albaraaak/Travel-Planner-Booking-System**
