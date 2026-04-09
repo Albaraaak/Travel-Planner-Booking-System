@@ -1,11 +1,11 @@
-# Travel-Planner-Booking-System
+# Travel-Planner-Booking-System 
 
 
 A full-stack travel and booking web application that allows users to explore destinations, view travel packages, and make bookings easily and efficiently. The platform is designed to provide a smooth user experience with dynamic content, responsive design, and secure data handling.
 
 
 
-## ✨ Features
+## ✨ Features  
 
 
 - 🔐 **User Authentication** (Login / Signup)  
@@ -22,7 +22,7 @@ A full-stack travel and booking web application that allows users to explore des
 
 
 
-## 🛠️ Technologies
+## 🛠️ Technologies 
 - 🎨 _Frontend_: HTML, CSS, JavaScript, React  
 - ⚙️  _Backend_: Node.js, Express.js  
 - 🗄️  _Database_: MongoDB  
@@ -60,12 +60,12 @@ npm run dev
 ```
 
 
-5. Open (http://localhost:5173) in your browser
+5. Open http://localhost:5173 in your browser
 
 
 
 
-## ▶️ Usage
+## ▶️ Usage 
 
 
 - 🌐 **Open the application in your browser**
@@ -80,22 +80,22 @@ npm run dev
 
 
   
-## 🎯 Purpose
+## 🎯 Purpose 
 This project is built as part of a full-stack learning journey.
 It focuses on building a real-world travel platform that combines frontend design with backend functionality and database management.
 
 
 
-### 🤝 Contributing
+### 🤝 Contributing 
 Contributions are welcome! Feel free to open issues or submit a pull request.
 
 
-###  📜 License
+###  📜 License 
 This project is licensed under the **MIT License**.
 
 
 
-## 📬 Contact
+## 📬 Contact 
 📧 **Email:baraaabk1234@gmail.com**
 
 🔗 **Project Link: https://github.com/Albaraaak/Travel-Planner-Booking-System**
