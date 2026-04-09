@@ -2,13 +2,13 @@
 A full-stack travel and booking web application that allows users to explore destinations, view travel packages, and make bookings easily and efficiently. The platform is designed to provide a smooth user experience with dynamic content, responsive design, and secure data handling.
 
 # ✨ Features
-. User Login / Signup
-.🧭 Browse destinations and travel categories
-.⭐ View “Best Picks” and recommended places
-.🛒 Booking system for trips and packages
-. Product Details Page
-.👤 User profile and favorites management
-.🔍 Search and filter functionality
+. User Login / Signup<b>
+.🧭 Browse destinations and travel categories<b>
+.⭐ View “Best Picks” and recommended places<b>
+.🛒 Booking system for trips and packages<b>
+. Product Details Page<b>
+.👤 User profile and favorites management<b>
+.🔍 Search and filter functionality<b>
 .📱 Fully responsive design
 
 # 🛠️ Tech Stack
