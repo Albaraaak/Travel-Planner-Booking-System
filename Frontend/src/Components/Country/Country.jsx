@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import './Country.css'
+import "./Country.css";
+
 function Country() {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -8,160 +9,130 @@ function Country() {
   if (!state) return <p>No country selected</p>;
 
   const { country } = state;
-  const seats = ["A1","A2","A3","B1","B2","B3","C1","C2","C3","D1","D2","D3","E1","E2","E3","F1","F2","F3",];
-  const [form, setForm] = useState({
-    from: "",
-    to: country.name,
-    departureDate: "",
-    returnDate: "",
-    tripType: "oneway",
-    passengers: 1,
-    travelClass: "economy",
-  });
 
-  const basePrice = 500;
-  const classMultiplier = {
-  economy: 1,
-  business: 1.5,
-  first: 2,
-};
+  // ✈️ SAME DATA BUT MIXED TYPES
+  const ticketsData = [
+    {
+      country: "France",
+      tickets: [
+        { id: 1, from: "Beirut", type: "oneway", date: "2026-06-10", price: 500, seat: "A1" },
+        { id: 2, from: "Dubai", type: "roundtrip", date: "2026-06-15", returnDate: "2026-06-25", price: 650, seat: "B2" },
+        { id: 3, from: "London", type: "oneway", date: "2026-06-20", price: 700, seat: "C3" },
+      ],
+    },
+    {
+      country: "Japan",
+      tickets: [
+        { id: 1, from: "Beirut", type: "roundtrip", date: "2026-07-01", returnDate: "2026-07-15", price: 900, seat: "A2" },
+        { id: 2, from: "Paris", type: "oneway", date: "2026-07-05", price: 1000, seat: "B1" },
+        { id: 3, from: "Doha", type: "roundtrip", date: "2026-07-10", returnDate: "2026-07-20", price: 1100, seat: "C2" },
+      ],
+    },
+    {
+      country: "USA",
+      tickets: [
+        { id: 1, from: "Beirut", type: "oneway", date: "2026-08-01", price: 800, seat: "A3" },
+        { id: 2, from: "Dubai", type: "roundtrip", date: "2026-08-10", returnDate: "2026-08-25", price: 950, seat: "B3" },
+        { id: 3, from: "Istanbul", type: "oneway", date: "2026-08-15", price: 1200, seat: "D1" },
+      ],
+    },
+    {
+      country: "Italy",
+      tickets: [
+        { id: 1, from: "Beirut", type: "oneway", date: "2026-05-10", price: 400, seat: "A1" },
+        { id: 2, from: "Athens", type: "roundtrip", date: "2026-05-12", returnDate: "2026-05-18", price: 450, seat: "B2" },
+        { id: 3, from: "Paris", type: "oneway", date: "2026-05-15", price: 550, seat: "C1" },
+      ],
+    },
+    {
+      country: "Lebanon",
+      tickets: [
+        { id: 1, from: "Dubai", type: "oneway", date: "2026-04-20", price: 200, seat: "A1" },
+        { id: 2, from: "Paris", type: "roundtrip", date: "2026-04-22", returnDate: "2026-04-30", price: 250, seat: "B1" },
+        { id: 3, from: "Istanbul", type: "oneway", date: "2026-04-25", price: 300, seat: "C3" },
+      ],
+    },
+    {
+      country: "UAE",
+      tickets: [
+        { id: 1, from: "Beirut", type: "roundtrip", date: "2026-09-01", returnDate: "2026-09-07", price: 350, seat: "A2" },
+        { id: 2, from: "London", type: "oneway", date: "2026-09-05", price: 450, seat: "B2" },
+        { id: 3, from: "Rome", type: "roundtrip", date: "2026-09-10", returnDate: "2026-09-20", price: 500, seat: "C2" },
+      ],
+    },
+    {
+      country: "Brazil",
+      tickets: [
+        { id: 1, from: "Beirut", type: "oneway", date: "2026-10-01", price: 1100, seat: "A3" },
+        { id: 2, from: "Madrid", type: "roundtrip", date: "2026-10-05", returnDate: "2026-10-15", price: 1200, seat: "B1" },
+        { id: 3, from: "Paris", type: "oneway", date: "2026-10-10", price: 1300, seat: "C1" },
+      ],
+    },
+    {
+      country: "Germany",
+      tickets: [
+        { id: 1, from: "Beirut", type: "roundtrip", date: "2026-11-01", returnDate: "2026-11-10", price: 600, seat: "A1" },
+        { id: 2, from: "Rome", type: "oneway", date: "2026-11-03", price: 650, seat: "B3" },
+        { id: 3, from: "London", type: "oneway", date: "2026-11-06", price: 700, seat: "C2" },
+      ],
+    },
+  ];
 
-const pricePerTicket = basePrice * classMultiplier[form.travelClass];
-const totalPrice = pricePerTicket * form.passengers;
+  const currentTickets =
+    ticketsData.find((t) => t.country === country.name)?.tickets || [];
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-navigate("/checkout", {
-  state: {
-    ...form,
-    pricePerTicket,
-    totalPrice,
-  },
-});
-    // Basic validation
-    if (!form.from || !form.departureDate || !form.passengers) {
-      alert("Please fill required fields!");
-      return;
-    }
-
-    if (form.tripType === "roundtrip" && !form.returnDate) {
-      alert("Please select return date!");
-      return;
-    }
-
-    // Navigate to checkout with ALL data
+  const handleBook = (ticket) => {
     navigate("/checkout", {
-      state: form,
+      state: {
+        country: country.name,
+        from: ticket.from,
+        date: ticket.date,
+        returnDate: ticket.returnDate || null,
+        type: ticket.type,
+        seat: ticket.seat,
+        price: ticket.price,
+      },
     });
   };
 
   return (
     <div className="ticket-form">
-      <h1>Book your trip to {country.name} ✈️</h1>
-     <p>{country.description || "No description yet."}</p>
-      <form onSubmit={handleSubmit}>
-        {/* From */}
-        <input
-          type="text"
-          name="from"
-          placeholder="From (City)"
-          value={form.from}
-          onChange={handleChange}
-          required
-        />
 
-        {/* To */}
-        <input
-          type="text"
-          name="to"
-          value={form.to}
-          readOnly
-        />
+      <h1>Available Tickets to {country.name} ✈️</h1>
+      <p>{country.description || "No description yet."}</p>
 
-        {/* Trip Type */}
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="tripType"
-              value="oneway"
-              checked={form.tripType === "oneway"}
-              onChange={handleChange}
-            />
-            One Way
-          </label>
+      {currentTickets.length === 0 ? (
+        <p>No tickets available for this country 😢</p>
+      ) : (
+        currentTickets.map((ticket) => (
+          <div
+            key={ticket.id}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginBottom: "10px",
+              borderRadius: "5px",
+            }}
+          >
+            <p><b>From:</b> {ticket.from}</p>
+            <p><b>Type:</b> {ticket.type}</p>
+            <p><b>Departure:</b> {ticket.date}</p>
 
-          <label>
-            <input
-              type="radio"
-              name="tripType"
-              value="roundtrip"
-              checked={form.tripType === "roundtrip"}
-              onChange={handleChange}
-            />
-            Round Trip
-          </label>
-        </div>
+            {/* ✅ SHOW ONLY IF ROUNDTRIP */}
+            {ticket.type === "roundtrip" && (
+              <p><b>Return:</b> {ticket.returnDate}</p>
+            )}
 
-        {/* Departure */}
-        <input
-          type="date"
-          name="departureDate"
-          value={form.departureDate}
-          onChange={handleChange}
-           min={new Date().toISOString().split("T")[0]} 
-          required
-        />
+            <p><b>Seat:</b> {ticket.seat}</p>
+            <p><b>Price:</b> ${ticket.price}</p>
 
-        {/* Return Date (only if roundtrip) */}
-        {form.tripType === "roundtrip" && (
-          <input
-            type="date"
-            name="returnDate"
-            value={form.returnDate}
-            onChange={handleChange}
-            min={form.departureDate || new Date().toISOString().split("T")[0]}
-          />
-        )}
+            <button onClick={() => handleBook(ticket)}>
+              Book Now
+            </button>
+          </div>
+        ))
+      )}
 
-        {/* Passengers */}
-        <input
-          type="number"
-          name="passengers"
-          min="1"
-          value={form.passengers}
-          onChange={handleChange}
-        />
-
-        {/* Class */}
-        <select
-          name="travelClass"
-          value={form.travelClass}
-          onChange={handleChange}
-        >
-          <option value="economy">Economy</option>
-          <option value="business">Business</option>
-          <option value="first">First Class</option>
-        </select>
-
-         <select name="seat"
-          value={form.seat} onChange={handleChange} required>
-          <option value="">Select Seat</option>
-          {seats.map((s, idx) => <option key={idx} value={s}>{s}</option>)}
-        </select>
-
-
-
-        <div className="price-box">
-          <p>Price per ticket: ${pricePerTicket}</p>
-            <p><strong>Total: ${totalPrice}</strong></p>
-        </div>
-        <button type="submit">Continue to Checkout</button>
-      </form>
     </div>
   );
 }

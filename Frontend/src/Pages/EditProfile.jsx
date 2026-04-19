@@ -40,8 +40,7 @@ function EditProfile() {
       <br /><br />
 
 
-      <button
-  onClick={() => {
+      <button onClick={() => {
   alert("Profile updated successfully ✅");
   navigate("/profile", {
     state: { name, email, phone, location }

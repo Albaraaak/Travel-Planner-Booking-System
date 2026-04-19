@@ -1,4 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 function ProfileInfo() {
   const navigate = useNavigate();
   const user = {
@@ -8,6 +9,11 @@ function ProfileInfo() {
     location: "Beirut, Lebanon",
     bookings: []
   };
+  const [bookings, setBookings] = useState([]);
+  useEffect(() => {
+  const saved = JSON.parse(localStorage.getItem("bookings")) || [];
+  setBookings(saved);
+}, []);
 
   return (
     <div className="profile-container">
@@ -15,22 +21,24 @@ function ProfileInfo() {
       <p>📧 {user.email}</p>
       <p>📞 {user.phone}</p>
       <p>📍 {user.location}</p>
+     <div className="bookings-section">
+  <h2>My Bookings</h2>
 
-      {/* Bookings */}
-      <div className="bookings-section">
-        <h2>My Bookings</h2>
-        {user.bookings.length === 0 ? (
-          <p>No bookings yet.</p>
-        ) : (
-          <ul>
-            {user.bookings.map((booking) => (
-              <li key={booking.id}>
-                {booking.destination} - {booking.date} - ${booking.price}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+  {bookings.length === 0 ? (
+    <p>No bookings yet.</p>
+  ) : (
+    <ul>
+      {bookings.map((booking) => (
+        <li key={booking.id}>
+          ✈️ {booking.destination} | 📅 {booking.date} | 💰 ${booking.price} | 🧾 {booking.type}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
+
+      
           {/* Actions */}
       <div className="profile-actions">
         <button onClick={() => navigate("/editprofile")}>Edit Profile</button>

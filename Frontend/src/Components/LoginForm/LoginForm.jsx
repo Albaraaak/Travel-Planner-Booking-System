@@ -27,10 +27,11 @@ function LoginForm(){
       );
 
       console.log("response", response);
+       setmessage( response.data.message)
       navigate("/Home");
 
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   };
 
@@ -58,7 +59,6 @@ function LoginForm(){
         />
       </div>
 
-      {error && <p>{error}</p>}
 
       <button type="submit">Login</button>
       <p>Don't have an account?  <Link to="/SignUp">Sign Up</Link> </p>

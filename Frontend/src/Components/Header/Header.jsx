@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 function Header() {
   const[isLoggedIn,setIsLoggedIn] = useState(false)
-
+  const navigate= useNavigate()
   return (
     <header>
       <h1>Let's GO</h1>
@@ -23,6 +23,8 @@ function Header() {
          
           <button onClick={()=>{setIsLoggedIn (true)
             console.log("LoggedIn Value", isLoggedIn,)
+            navigate("/Login");
+
           }
           }>Login</button>
           </>)

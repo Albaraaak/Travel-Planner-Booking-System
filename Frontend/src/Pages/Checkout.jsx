@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom"
 function Checkout() {
   const { state } = useLocation();
   const [form, setForm] = useState({
-    name: "",
-    phone: "",
     paymentMethod: ""
   });
 
@@ -14,17 +12,40 @@ function Checkout() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const handleSubmit = (e) => {
+  e.preventDefault();
 
-    if (!form.name || !form.phone || !form.paymentMethod) {
+  const newBooking = {
+    id: Date.now(),
+    destination: state.country || state.to,
+    from: state.from || "",
+    passengers: state.passengers || 1,
+    travelClass: state.travelClass || "",
+    seat: state.seat || "",
+    price: state.totalPrice || 0,
+    date: new Date().toLocaleDateString(),
+  };
+
+  const oldBookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+  const updatedBookings = [...oldBookings, newBooking];
+
+  localStorage.setItem("bookings", JSON.stringify(updatedBookings));
+
+  alert("Booking Confirmed ✅");
+};
+
+    if (!form.paymentMethod) {
       alert("Please fill all fields!");
       return;
     }
 
     alert(
-      `✅ Booking Confirmed!\n\nName: ${form.name}\nPhone: ${form.phone}\nPayment: ${form.paymentMethod}`
+      `✅ Booking Confirmed : \nPayment: ${form.paymentMethod}`
     );
 
-    setForm({ name: "", phone: "", paymentMethod: "" });
+    setForm({ paymentMethod: "" });
   };
 
   return (
@@ -32,23 +53,7 @@ function Checkout() {
       <h1>Complete Your Booking</h1>
 
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={form.phone}
-          onChange={handleChange}
-          required
-        />
+       
 
         <h3>Payment Method</h3>
         <select
@@ -64,8 +69,7 @@ function Checkout() {
         </select>
         {state && (
   <>
-   <p style={{ color: "blue" }}>Price per ticket: ${state.pricePerTicket}</p>
-<p style={{ color: "blue" }}><strong>Total: ${state.totalPrice}</strong></p>
+   
   </>
 )}
 
