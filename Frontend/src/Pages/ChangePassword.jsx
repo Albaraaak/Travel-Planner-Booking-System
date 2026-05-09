@@ -15,6 +15,7 @@ function ChangePassword () {
     setCurrent("");
     setNewPass("");
     setConfirm("");
+    
   navigate("/profile");
   };
 

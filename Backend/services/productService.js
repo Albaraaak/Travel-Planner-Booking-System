@@ -1,27 +1,29 @@
 const Product = require("../models/Product");
 
-const insertProduct = async (title, description, destination, price, date, nbOfPeople, type, rating, reviews) => {
-    try {
-        const productToCreate = {
-            title,
-            description,
-            destination,
-            price,
-            date,
-            nbOfPeople,
-            type,
-            rating, 
-            reviews,
-            availableSeats: nbOfPeople, // seats start equal to total capacity
-        };
+const insertProduct = async (data) => {
+  try {
+    // 🔥 CASE 1: ARRAY (bulk insert)
+    if (Array.isArray(data)) {
+      const cleanedData = data.map(item => ({
+        ...item,
+        title: item.title ? item.title.trim() : "",
+      }));
 
-        const newProduct = await Product.create(productToCreate);
-        return {
-            id: newProduct._id,
-        };
-    } catch (err) {
-        throw err;
+      const result = await Product.insertMany(cleanedData);
+      return result;
     }
+
+    // 🔥 CASE 2: SINGLE PRODUCT
+    const newProduct = await Product.create({
+      ...data,
+      title: data.title ? data.title.trim() : ""
+    });
+
+    return newProduct;
+
+  } catch (err) {
+    throw err;
+  }
 };
 
 const getProducts = async () => {

@@ -37,7 +37,10 @@ const insertTicketValidation = [
     .exists()
     .isIn(['economy', 'business', 'first-class'])
     .withMessage('Invalid ticket type'),
-
+check('travelType')
+    .exists()
+    .isIn(['one-way', 'round-trip'])
+    .withMessage('Travel type must be either "one-way" or "round-trip"'),
 
 
 ];
@@ -79,6 +82,11 @@ const updateTicketValidation = [
     .optional()
     .isIn(['economy', 'business', 'first-class'])
     .withMessage('Invalid type'),
+    
+    check('travelType')
+    .exists()
+    .isIn(['one-way', 'round-trip'])
+    .withMessage('Travel type must be either "one-way" or "round-trip"'),
 
 ];
 module.exports = { insertTicketValidation , updateTicketValidation };

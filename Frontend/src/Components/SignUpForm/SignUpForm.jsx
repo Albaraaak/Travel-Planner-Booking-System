@@ -17,7 +17,8 @@ function SignUpForm() {
     try {
       const response= await axios.post(
        "http://localhost:3000/api/users/signup",
-        { firstName, lastName, username, email, password,phoneNumber }
+        { firstName, lastName, username, email, password,phoneNumber },
+        { withCredentials: true }
       );
       console.log(response.data)
         setmessage( response.data.message)

@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     },
     description:{
         type: String,
-        required:true
+        required:false
     },
     destination:{
         type: String,
@@ -25,12 +25,10 @@ const productSchema = new mongoose.Schema({
   type: Number,
   default: 0
 },
-reviews: 
-  {
-    user: String,
-    comment: String,
-    rating: Number
-  },
+reviews: {
+  type: Number,
+  default: 0
+},
 
     nbOfPeople:{
         type: Number,
@@ -40,7 +38,24 @@ reviews:
         type:String,
         enum: ["adventure", "cultural", "relaxation", "cruise", "safari", "city-tour"],
         required:true
-    }
+    },
+     duration: {
+    type: String
+  },
+
+  image: {
+    type: String
+  },
+
+  available: {
+    type: Boolean,
+    default: true
+  },
+
+  discount: {
+    type: Number,
+    default: 0
+  }
 
 });
 const Product= mongoose.model('Product', productSchema)

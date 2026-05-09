@@ -1,137 +1,134 @@
-.continent-card {
-  background: white;
-  border-radius: 16px;
+
+div:has(> .continent-content) {
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+  margin-bottom: 28px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
-.continent-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+div:has(> .continent-content):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(102, 126, 234, 0.2);
 }
 
-.continent-image-wrapper {
-  position: relative;
+div:has(> .continent-content) > img {
   width: 100%;
   height: 280px;
-  overflow: hidden;
-}
-
-.continent-image {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  display: block;
+  transition: transform 0.4s;
 }
 
-.continent-card:hover .continent-image {
-  transform: scale(1.1);
+div:has(> .continent-content):hover > img {
+  transform: scale(1.04);
 }
 
-.continent-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 1.5rem;
-}
-
-.continent-name {
-  color: white;
-  font-size: 2rem;
+div:has(> .continent-content) > h2 {
+  font-size: 1.6rem;
   font-weight: 700;
+  color: #1e1b4b;
+  padding: 20px 24px 0;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .continent-content {
-  padding: 1.5rem;
-  flex: 1;
+  padding: 16px 24px 24px;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 .continent-description {
-  color: #4b5563;
-  line-height: 1.6;
-  margin: 0 0 1.5rem 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .countries-section {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .countries-title {
-  font-size: 1.1rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #1f2937;
-  margin: 0 0 1rem 0;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0;
 }
 
 .countries-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
 .country-item {
+  background: #f1f0ff;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background-color: #f3f4f6;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
 }
 
 .country-item:hover {
-  background-color: #e5e7eb;
-  transform: translateX(5px);
+  background: #e0ddff;
+  transform: translateY(-2px);
 }
 
-
 .country-name {
-  font-size: 0.9rem;
-  color: #374151;
+  background: none;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
   font-weight: 500;
+  color: #5b4fcf;
+  cursor: pointer;
+  padding: 8px 10px;
+  width: 100%;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.country-name:hover {
+  color: #764ba2;
 }
 
 .explore-button {
   width: 100%;
-  padding: 0.875rem;
+  padding: 14px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: auto;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-top: 4px;
 }
 
 .explore-button:hover {
+  opacity: 0.9;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
 }
 
 .arrow {
-  font-size: 1.25rem;
-  transition: transform 0.3s ease;
+  font-size: 1.1rem;
+  transition: transform 0.2s;
 }
 
 .explore-button:hover .arrow {
@@ -139,19 +136,26 @@
 }
 
 @media (max-width: 768px) {
-  .continent-card {
-    margin-bottom: 1.5rem;
+  div:has(> .continent-content) > img {
+    height: 200px;
   }
-  
-  .continent-image-wrapper {
-    height: 220px;
+
+  div:has(> .continent-content) > h2 {
+    font-size: 1.3rem;
+    padding: 16px 18px 0;
   }
-  
-  .continent-name {
-    font-size: 1.5rem;
+
+  .continent-content {
+    padding: 12px 18px 20px;
   }
-  
+
   .countries-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .countries-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

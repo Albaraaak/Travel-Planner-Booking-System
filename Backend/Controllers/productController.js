@@ -13,8 +13,8 @@ const insertProductController = async (req, res) => {
             });
         }
 
-        const { title, description, destination, price, date, nbOfPeople, type,rating, reviews } = req.body;
-        const response = await insertProduct(title, description, destination, price, date, nbOfPeople, type, rating, reviews);
+        const { title, duration,description,destination, price, date, nbOfPeople, type,rating, reviews,available,image,discount } = req.body;
+       const response = await insertProduct(req.body);
 
         res.status(201).json({
             success: true,

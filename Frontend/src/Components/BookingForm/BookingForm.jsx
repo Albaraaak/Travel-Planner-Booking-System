@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./BookingForm.css";
+import axios from "axios";
 
 function BookingForm() {
   const nav = useNavigate();
   const location = useLocation();
-  const { title, image, country } = location.state || {};
+
+  const { title, image, country, id } =
+    location.state || {};
 
   const [guests, setGuests] = useState(1);
 
@@ -13,22 +16,42 @@ function BookingForm() {
     return <p>No booking data</p>;
   }
 
-  const handleConfirm = () => {
-    if (!guests || guests < 1) {
-      alert("Please enter number of guests!");
+  const handleConfirm = async () => {
+    try {
+      if (!guests || guests < 1) {
+        alert("Please enter number of guests!");
+        return;
+      }if (!id) {
+      alert("Missing product. Please go back and try again.");
       return;
     }
 
-    nav("/checkout", {
-      state: {
-        country,
-        guests
-      }
-    });
+      const token = localStorage.getItem("token");
+
+      await axios.post(
+        `http://localhost:3000/api/bookings/order/${id}`,
+        { nbOfPeople: guests },
+        {
+          withCredentials:true,
+          },
+        
+      );
+
+      alert("Booking successful!");
+
+      // go to bookings page
+      nav("/checkout");
+
+    } catch (error) {
+  console.log("FULL ERROR:", error);
+  console.log("RESPONSE:", error.response);
+  alert(error.response?.data?.message || "Booking failed");
+}
   };
 
   return (
     <div className="booking-container">
+
       <button className="btn" onClick={() => nav(-1)}>
         ⬅ Back
       </button>
@@ -37,8 +60,6 @@ function BookingForm() {
         <img src={image} alt={title} />
 
         <div className="booking-form">
-
-          {/* INPUT CONTROLLED */}
           <input
             type="number"
             placeholder="Guests"
@@ -47,12 +68,15 @@ function BookingForm() {
             onChange={(e) => setGuests(Number(e.target.value))}
           />
 
-          <button className="btn primary" onClick={handleConfirm}>
+          <button
+            className="btn primary"
+            onClick={handleConfirm}
+          >
             Confirm Booking
           </button>
-
         </div>
       </div>
+
     </div>
   );
 }

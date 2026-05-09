@@ -1,55 +1,37 @@
 const { validationResult } = require("express-validator");
 
 const { insertTicket, getTickets, getTicketById, updateTicket, deleteTicket} = require("../services/ticketService");
-
+const Ticket = require("../models/Ticket");
 // CREATE
 const insertTicketController = async (req, res) => {
   try {
-    const errors = validationResult(req);
+    const tickets = req.body;
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        success: false,
-        error: errors.array(),
-        message: "Validation error",
+    // if array → insertMany
+    if (Array.isArray(tickets)) {
+      const result = await Ticket.insertMany(tickets);
+
+      return res.status(201).json({
+        success: true,
+        data: result,
+        message: "Multiple tickets created"
       });
     }
 
-    const {
-      from,
-      to,
-      departureDate,
-      returnDate,
-      price,
-      availableSeats,
-      type,
-      airline,
-      duration
-    } = req.body;
-
-    const response = await insertTicket(
-      from,
-      to,
-      departureDate,
-      returnDate,
-      price,
-      availableSeats,
-      type,
-      airline,
-      duration
-    );
+    // if single object → normal insert
+    const result = await Ticket.create(tickets);
 
     res.status(201).json({
       success: true,
-      data: response,
-      message: "Ticket added successfully",
+      data: result,
+      message: "Ticket created"
     });
 
   } catch (err) {
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: err.message,
-      message: "Server error",
+      message: "Server error"
     });
   }
 };

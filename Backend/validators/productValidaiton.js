@@ -8,13 +8,11 @@ const insertProductValidation = [
     .notEmpty()
     .withMessage('Title is required'),
 
-  check('description')
+   check('duration')
     .exists()
     .trim()
     .notEmpty()
-    .withMessage('Description is required')
-    .isLength({ min: 10 })
-    .withMessage('Description must be at least 10 characters'),
+    .withMessage('Duration is required'),
 
   check('destination')
     .exists()
@@ -64,6 +62,24 @@ const insertProductValidation = [
   check('reviews.*.rating')
     .optional()
     .isFloat({ min: 1, max: 5 }),
+    // ⭐ NEW: available (true/false)
+  check('available')
+    .optional()
+    .isBoolean()
+    .withMessage('Available must be true or false'),
+
+  // ⭐ NEW: discount
+  check('discount')
+    .optional()
+    .isInt({ min: 0, max: 100 })
+    .withMessage('Discount must be between 0 and 100'),
+
+  // ⭐ NEW: image
+  check('image')
+    .optional()
+    .isURL()
+    .withMessage('Image must be a valid URL'),
+
 
 ];
 

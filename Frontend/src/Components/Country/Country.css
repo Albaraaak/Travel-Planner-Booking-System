@@ -1,90 +1,134 @@
-/* ===== Ticket Form Global Fix ===== */
 .ticket-form {
-  color: #222;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #ffffff !important;
+  color: #111827;
+  margin: 48px auto 48px auto; /* Top & bottom spacing to prevent overlap */
+  padding: 40px 24px;
+  border-radius: 16px;
+  max-width: 1000px;
+  width: 90%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* ===== Inputs & Select ===== */
-.ticket-form input,
-.ticket-form select {
-  width: 100%;
+/* Heading & Description */
+.ticket-form h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.ticket-form > p {
+  color: #4b5563;
+  font-size: 1.05rem;
+  text-align: center;
+  margin: 0 0 36px 0;
+  line-height: 1.6;
+}
+
+/* Target inline-styled ticket divs */
+.ticket-form > div[style*="border"] {
+  all: unset;
+  display: block;
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 22px !important;
+  margin: 0 0 18px 0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ticket-form > div[style*="border"]:hover {
+  border-color: #d1d5db !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Ticket info paragraphs */
+.ticket-form > div[style*="border"] p {
   margin: 8px 0;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #222;
-  font-size: 14px;
+  font-size: 0.98rem;
+  color: #374151;
 }
 
-/* ===== Paragraph Text ===== */
-.ticket-form p {
-  color: #222;
-  margin: 5px 0;
+.ticket-form > div[style*="border"] p b {
+  color: #1f2937;
+  font-weight: 600;
+  min-width: 85px;
+  display: inline-block;
 }
 
-/* ===== Trip Type (One Way / Round Trip) ===== */
-.trip-type {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
+/* Price styling */
+.ticket-form > div[style*="border"] p:last-child {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #059669;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
 }
 
-.trip-type label {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
-  cursor: pointer;
-  transition: 0.3s;
-
-  background-color: #f0f0f0;
-  color: #222;
-  font-weight: 500;
-}
-
-/* Hide default radio */
-.trip-type input {
-  display: none;
-}
-
-/* Active selection */
-.trip-type .active {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-/* Hover effect */
-.trip-type label:hover {
-  background-color: #e0e0e0;
-}
-
-/* ===== Price Box ===== */
-.price-box {
-  margin-top: 15px;
-  padding: 12px;
-  background: #eef6ff;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  color: #000;
-}
-
-/* ===== Button ===== */
-.ticket-form button {
-  margin-top: 15px;
-  padding: 12px;
+/* Book Button - Clean Blue */
+.ticket-form > div[style*="border"] button {
+  margin-top: 16px;
+  padding: 12px 24px;
   width: 100%;
   border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.ticket-form button:hover {
-  background-color: #0056b3;
+.ticket-form > div[style*="border"] button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.ticket-form > div[style*="border"] button:active {
+  transform: translateY(0);
+}
+
+/* Empty State - Pure White */
+.ticket-form > p:not(:first-of-type) {
+  background: #ffffff !important;
+  color: #6b7280;
+  text-align: center;
+  padding: 32px 20px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 12px;
+  margin: 20px 0 0 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .ticket-form {
+    margin: 32px auto;
+    padding: 28px 20px;
+  }
+  .ticket-form h1 { font-size: 1.6rem; }
+  .ticket-form > p { font-size: 1rem; margin-bottom: 28px; }
+  .ticket-form > div[style*="border"] { padding: 18px !important; }
+  .ticket-form > div[style*="border"] p { font-size: 0.95rem; }
+}
+
+@media (max-width: 480px) {
+  .ticket-form {
+    margin: 24px auto;
+    padding: 24px 16px;
+    width: 95%;
+  }
+  .ticket-form h1 { font-size: 1.4rem; }
+  .ticket-form > div[style*="border"] { padding: 16px !important; }
+  .ticket-form > div[style*="border"] p:last-child { font-size: 1.15rem; }
+}
+
+/* Focus/Accessibility */
+.ticket-form > div[style*="border"] button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }

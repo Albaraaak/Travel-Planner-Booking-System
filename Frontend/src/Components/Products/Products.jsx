@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import './Products.css';
 function Products(props) {
   const navigate=useNavigate()
-  const {image,title} =props;
+  const {image,title,id} =props;
   const handleBooking =() => {
-    navigate ("/Booking",{ state :{image,title}})
+    navigate ("/Booking",{ state :{image,title,id} })
   }
   return (
     <div className="product-card">

@@ -28,8 +28,8 @@ const insertUserController = async (req, res) => {
         message: "Server error"   
     });
   }
-};
 
+};
 const getUserByIdController = async (req,res) => {
   try{
   const {id}= req.params;

@@ -29,7 +29,11 @@ const ticketSchema = new mongoose.Schema({
     enum: ["economy", "business", "first-class"],
     required: true
   },
-  
+  travelType :{
+    type:String,
+    enum:["one-way", "round-trip"],
+    required:true
+  }
 
 }, { timestamps: true });
 

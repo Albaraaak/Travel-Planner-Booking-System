@@ -24,17 +24,20 @@ function ProfileInfo() {
      <div className="bookings-section">
   <h2>My Bookings</h2>
 
-  {bookings.length === 0 ? (
-    <p>No bookings yet.</p>
-  ) : (
-    <ul>
-      {bookings.map((booking) => (
-        <li key={booking.id}>
-          ✈️ {booking.destination} | 📅 {booking.date} | 💰 ${booking.price} | 🧾 {booking.type}
-        </li>
-      ))}
-    </ul>
-  )}
+{bookings.length === 0 ? (
+  <p>No bookings yet.</p>
+) : (
+  <ul>
+    {bookings.map((booking) => (
+      <li key={booking._id}>
+        ✈️ {booking.product?.title} |
+        👤 {booking.nbOfPeople} guests |
+        💰 ${booking.totalPrice} |
+        🧾 {booking.status}
+      </li>
+    ))}
+  </ul>
+)}
 </div>
 
 

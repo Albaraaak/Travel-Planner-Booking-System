@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
-
 const app = express();
-
-app.use(express.json())
+const cookieParser = require('cookie-parser');
+const cors = require("cors")
 const db = require('./config/Config');
-const cors = require("cors");
+
 
 // Allow requests from frontend
 app.use(cors({
@@ -12,6 +12,9 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true
 }));
+app.use(express.json())
+app.use(cookieParser());
+
 const userRoute = require ('./routes/userRoute');
 app.use('/api/users',userRoute)
 const productRoute = require("./routes/productRoute");
@@ -25,10 +28,7 @@ const ticketRoute = require("./routes/ticketRoute");
 app.use("/api/tickets", ticketRoute );
 
 
-const cookieParser = require('cookie-parser');
-require('dotenv').config();
 
-app.use(cookieParser());
 const PORT = 3000;
 
 

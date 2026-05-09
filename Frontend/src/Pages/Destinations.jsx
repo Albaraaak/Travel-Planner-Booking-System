@@ -3,11 +3,13 @@ import Footer from "../Components/Footer/Footer";
 import Header  from "../Components/Header/Header"
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+
 function Destination (){
   const location = useLocation();
   const state= location.state;
   const [search, setSearch] = useState("");
- const continents = [
+
+  const continents = [
     {
       continent: "Europe",
       image: "https://images.unsplash.com/photo-1761472871829-9c4a2411dc35?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxldXJvcGUlMjBsYW5kbWFya3MlMjBlaWZmZWwlMjB0b3dlcnxlbnwxfHx8fDE3NzIxMTQ2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -99,60 +101,89 @@ function Destination (){
       ]
     },
   ];
-  
+
   const query = search.toLowerCase();
 
-const filteredContinents = continents.filter((item) => {
-  return (
-    item.continent.toLowerCase().includes(query) ||
-    item.countries?.some((country) =>
-      country.name.toLowerCase().includes(query)
-    )
-  );
-});
-
-
+  const filteredContinents = continents.filter((item) => {
+    return (
+      item.continent.toLowerCase().includes(query) ||
+      item.countries?.some((country) =>
+        country.name.toLowerCase().includes(query)
+      )
+    );
+  });
 
   return (
     <>
+      <style>{`
+        .destination-page {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px 24px;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .search-input {
+          width: 100%;
+          padding: 14px 20px;
+          margin-bottom: 32px;
+          border-radius: 12px;
+          border: 1.5px solid rgba(102, 126, 234, 0.25);
+          background: #fff;
+          font-family: 'Poppins', sans-serif;
+          font-size: 0.95rem;
+          color: #1e1b4b;
+          outline: none;
+          box-shadow: 0 2px 12px rgba(102, 126, 234, 0.08);
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input::placeholder {
+          color: #aaa;
+        }
+
+        .search-input:focus {
+          border-color: #667eea;
+          box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+        }
+
+        .no-results {
+          text-align: center;
+          color: #94a3b8;
+          font-size: 1rem;
+          margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+          .destination-page {
+            padding: 24px 16px;
+          }
+        }
+      `}</style>
+
       <Header />
 
-      <div style={{ padding: "20px", maxWidth: "1200px", margin: "auto" }}>
-        
-        {/* SEARCH INPUT */}
+      <div className="destination-page">
         <input
           type="text"
           placeholder="Search countries..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "100%",
-            marginBottom: "20px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            fontSize: "16px",
-          }}
+          className="search-input"
         />
 
-        {filteredContinents.length === 0 && filteredTickets.length === 0 ? (
-  <p style={{ textAlign: "center", color: "red" }}>
-    No results found 😢
-  </p>
-) : (
-  <>
-    {filteredContinents.map((continent) => (
-      <ContinentCard
-        key={continent.continent}
-        {...continent}
-      />
-    ))}
-
-    {/* OPTIONAL: show ticket results */}
-   
-   
-  </>
-)}
+        {filteredContinents.length === 0 ? (
+          <p className="no-results">No results found 😢</p>
+        ) : (
+          <>
+            {filteredContinents.map((continent) => (
+              <ContinentCard
+                key={continent.continent}
+                {...continent}
+              />
+            ))}
+          </>
+        )}
 
         <Footer />
       </div>

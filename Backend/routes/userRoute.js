@@ -6,7 +6,7 @@ const {loginController} = require ('../Controllers/authController')
 const router = express.Router();
 
 
-router.post('/signup',insertUserValidation, insertUserController);
+router.post('/signup',insertUserValidation, authenticateToken, insertUserController);
 router.post('/login', loginController);
 router.get('/getUserById/:id',authenticateToken,getUserByIdController);
 router.get('/admin/getAllUsers',authenticateToken,getUsersController);

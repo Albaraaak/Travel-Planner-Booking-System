@@ -9,6 +9,7 @@ const insertTicket = async (
   price,
   availableSeats,
   type,
+  travelType
 ) => {
   try {
     const ticketToCreate = {
@@ -19,6 +20,7 @@ const insertTicket = async (
       price,
       availableSeats,
       type,
+      travelType
     
     };
 
