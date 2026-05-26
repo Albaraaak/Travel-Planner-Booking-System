@@ -1,5 +1,15 @@
 const { validationResult } = require('express-validator');
-const {insertUser, getUserById, getUsers,changeUserPassword,updateUser,deleteUser} = require('../services/userServices'); 
+const {
+  insertUser,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  getUserById,
+  getUsers,
+  changeUserPassword,
+  updateUser,
+  deleteUser,
+} = require("../services/userServices");
 
 const insertUserController = async (req, res) => {
   try {
@@ -138,6 +148,68 @@ const deleteProfileController = async (req, res) => {
     });
   }
 };
+const verifyEmailController = async (req, res) => {
+  try {
+    const { email, code } = req.body;
 
-module.exports = { insertUserController,getUserByIdController,getUsersController,
-  changePasswordController, updateProfileController,deleteProfileController}
+    const response = await verifyEmail(email, code);
+
+    res.status(200).json({
+      success: true,
+      message: response.message,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const forgotPasswordController = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const response = await forgotPassword(email);
+
+    res.status(200).json({
+      success: true,
+      message: response.message,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const resetPasswordController = async (req, res) => {
+  try {
+    const { email, code, newPassword } = req.body;
+
+    const response = await resetPassword(email, code, newPassword);
+
+    res.status(200).json({
+      success: true,
+      message: response.message,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  insertUserController,
+  getUserByIdController,
+  getUsersController,
+  changePasswordController,
+  updateProfileController,
+  deleteProfileController,
+  verifyEmailController,
+  forgotPasswordController,
+  resetPasswordController,
+};

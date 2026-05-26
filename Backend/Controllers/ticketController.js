@@ -128,6 +128,46 @@ const deleteTicketController = async (req, res) => {
     });
   }
 };
+const adminDeleteUserController = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-module.exports = { insertTicketController,getTicketsController,getTicketByIdController,updateTicketController,deleteTicketController
+    await deleteUser(id);
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Server error"
+    });
+  }
 };
+
+const adminChangeRoleController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    const response = await updateUser(id, { role });
+
+    res.status(200).json({
+      success: true,
+      data: response,
+      message: "User role updated successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Server error"
+    });
+  }
+};
+module.exports = { insertTicketController,getTicketsController,getTicketByIdController,updateTicketController,deleteTicketController
+,adminDeleteUserController,adminChangeRoleController};

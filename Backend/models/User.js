@@ -34,7 +34,25 @@ const userSchema = new mongoose.Schema({
     age:{  
         type:Number,
         required:false
-    }
+    },
+    role: {
+  type: String,
+  enum: ["user", "admin"],
+  default: "user"
+},
+isVerified: {
+  type: Boolean,
+  default: false
+},
+verificationCode: {
+  type: String
+},
+resetPasswordCode: {
+  type: String,
+},
+resetPasswordExpires: {
+  type: Date,
+}
     
 });
 const User =mongoose.model ('User', userSchema)

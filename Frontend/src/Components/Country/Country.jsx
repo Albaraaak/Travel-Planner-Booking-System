@@ -9,26 +9,15 @@ function Country() {
 
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
-const [showAvailable, setShowAvailable] = useState(false);
-  // ❌ no country selected
-  if (!state) return <p>No country selected</p>;
 
-  const { country } = state;
-
-  // ===============================
-  // FETCH TICKETS FROM BACKEND
-  // ===============================
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:3000/api/tickets"
-        );
-
-        setTickets(res.data.data);
-        setLoading(false);
+        const res = await axios.get("http://localhost:3000/api/tickets");
+        setTickets(res.data.data || []);
       } catch (err) {
         console.error(err);
+      } finally {
         setLoading(false);
       }
     };
@@ -36,23 +25,37 @@ const [showAvailable, setShowAvailable] = useState(false);
     fetchTickets();
   }, []);
 
-  // ===============================
-  // FILTER BY SELECTED COUNTRY
-  // ===============================
- const filteredByCountry = tickets.filter(
-  (ticket) =>
-    ticket.to?.toLowerCase().trim() ===
-    country.name?.toLowerCase().trim()
-);
+  if (!state) {
+    return (
+      <div className="ticket-form">
+        <h1>No country selected</h1>
+      </div>
+    );
+  }
 
-const currentTickets = showAvailable
-  ? filteredByCountry.filter((t) => t.availableSeats > 0)
-  : filteredByCountry;
+  const { country } = state;
 
-  // ===============================
-  // BOOK BUTTON
-  // ===============================
+  const filteredByCountry = tickets.filter(
+    (ticket) =>
+      ticket.to?.toLowerCase().trim() === country.name?.toLowerCase().trim()
+  );
+
+  const currentTickets = filteredByCountry;
+
+  const formatDate = (date) => {
+    if (!date) return "N/A";
+    return new Date(date).toLocaleDateString("en-GB");
+  };
+
   const handleBook = (ticket) => {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (!isLoggedIn) {
+      alert("Please login first to continue booking.");
+      navigate("/login");
+      return;
+    }
+
     navigate("/checkout", {
       state: {
         ticketId: ticket._id,
@@ -69,9 +72,11 @@ const currentTickets = showAvailable
 
   return (
     <div className="ticket-form">
-
       <h1>Available Tickets to {country.name} ✈️</h1>
-      <p>{country.description || "No description yet."}</p>
+      <p>
+        {country.description ||
+          "Choose a ticket and complete your booking securely."}
+      </p>
 
       {loading && <p>Loading tickets...</p>}
 
@@ -79,44 +84,95 @@ const currentTickets = showAvailable
         <p>No tickets available for this country 😢</p>
       )}
 
-      {!loading &&
-        currentTickets.map((ticket) => (
-          <div
-            key={ticket._id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "12px",
-              marginBottom: "12px",
-              borderRadius: "8px",
-              background: "#f9f9f9",
-            }}
-          >
-            <p><b>From:</b> {ticket.from}</p>
+      <div className="tickets-container">
+        {!loading &&
+          currentTickets.map((ticket) => (
+            <div className="boarding-pass" key={ticket._id}>
+              <div className="ticket-main">
+                <div className="ticket-header">
+                  <div className="airline-logo">✈</div>
+                  <div>
+                    <h2>LET'S GO</h2>
+                    <span>BOARDING PASS</span>
+                  </div>
+                </div>
 
-            <p>
-              <b>Travel Type:</b>{" "}
-              {ticket.travelType === "round-trip"
-                ? "Round Trip"
-                : "One Way"}
-            </p>
+                <div className="ticket-body">
+                  <div className="barcode"></div>
 
-            <p><b>Class:</b> {ticket.type}</p>
+                  <div className="ticket-info">
+                    <div>
+                      <small>From</small>
+                      <h3>{ticket.from}</h3>
+                    </div>
 
-            <p><b>Departure:</b> {ticket.departureDate}</p>
+                    <div>
+                      <small>To</small>
+                      <h3>{ticket.to}</h3>
+                    </div>
 
-            {ticket.travelType === "round-trip" && (
-              <p><b>Return:</b> {ticket.returnDate}</p>
-            )}
+                    <div>
+                      <small>Date</small>
+                      <h3>{formatDate(ticket.departureDate)}</h3>
+                    </div>
 
-            <p><b>Available Seats:</b> {ticket.availableSeats}</p>
+                    <div>
+                      <small>Class</small>
+                      <h3>{ticket.type}</h3>
+                    </div>
 
-            <p><b>Price:</b> ${ticket.price}</p>
+                    <div>
+                      <small>Travel Type</small>
+                      <h3>
+                        {ticket.travelType === "round-trip"
+                          ? "Round Trip"
+                          : "One Way"}
+                      </h3>
+                    </div>
 
-            <button onClick={() => handleBook(ticket)}>
-              Book Now
-            </button>
-          </div>
-        ))}
+                    <div>
+                      <small>Seats Left</small>
+                      <h3>{ticket.availableSeats}</h3>
+                    </div>
+
+                    {ticket.travelType === "round-trip" && (
+                      <div>
+                        <small>Return</small>
+                        <h3>{formatDate(ticket.returnDate)}</h3>
+                      </div>
+                    )}
+
+                    <div>
+                      <small>Price</small>
+                      <h3>${ticket.price}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ticket-side">
+                <h3>BOARDING PASS</h3>
+                <p>
+                  <b>From:</b> {ticket.from}
+                </p>
+                <p>
+                  <b>To:</b> {ticket.to}
+                </p>
+                <p>
+                  <b>Date:</b> {formatDate(ticket.departureDate)}
+                </p>
+                <p>
+                  <b>Class:</b> {ticket.type}
+                </p>
+                <p>
+                  <b>Price:</b> ${ticket.price}
+                </p>
+
+                <button onClick={() => handleBook(ticket)}>Book Now</button>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

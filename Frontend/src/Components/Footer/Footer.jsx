@@ -52,15 +52,7 @@ import './Footer.css';
             Your trusted partner for unforgettable travel experiences around the world. Book with confidence and create memories that last a lifetime.
             </b></p>
           </div>
-          <div className="footer-section">
-            <h4 className="footer-heading">Support</h4>
-            <ul className="footer-links">
-              <li><a href="/faq">FAQ</a></li>
-              <li><a href="/terms">Terms & Conditions</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/help">Help Center</a></li>
-            </ul>
-          </div>
+          
           </div>
         
         

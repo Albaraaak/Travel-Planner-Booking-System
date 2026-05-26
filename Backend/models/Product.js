@@ -34,6 +34,11 @@ reviews: {
         type: Number,
         required:true,
     },
+    availableSeats: {
+  type: Number,
+  required: true,
+  default: 20
+},
     type:{
         type:String,
         enum: ["adventure", "cultural", "relaxation", "cruise", "safari", "city-tour"],

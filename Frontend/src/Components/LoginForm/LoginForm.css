@@ -1,89 +1,26 @@
-/* Background */
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-/* Card */
 form {
-  width: 340px;
-  padding: 30px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  text-align: center;
-  animation: fadeIn 0.8s ease;
+  width: min(520px, calc(100% - 32px));
+  margin: 54px auto;
+  padding: 32px;
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.055));
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: var(--shadow);
 }
 
-/* Title */
-h3 {
-  margin-bottom: 20px;
-  color: #333;
+form h3 {
+  margin: 0 0 22px;
+  font-size: 2rem;
+  color: #fff;
 }
 
-/* Inputs */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: 0.3s;
-  outline: none;
-}
-
-/* Input focus animation */
-input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 8px rgba(102,126,234,0.5);
-}
-
-/* Button */
-button {
-  width: 100%;
-  padding: 12px;
+form label {
+  display: block;
   margin-top: 10px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
+  color: #dbeafe;
+  font-weight: 800;
 }
 
-/* Button hover animation */
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* Links */
-p {
-  margin-top: 15px;
-}
-
-a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+form p { margin-bottom: 0; }
+form a { color: #67e8f9; font-weight: 900; }
+form button { width: 100%; margin-top: 10px; }

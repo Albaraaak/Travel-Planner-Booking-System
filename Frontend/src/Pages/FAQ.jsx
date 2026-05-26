@@ -1,15 +1,15 @@
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
-import LoginForm from "../Components/LoginForm/LoginForm";
+import Faq from "../Components/faq/faq";
 
-function Login() {
+function FAQ() {
   return (
     <>
       <Header />
-      <LoginForm />
+      <Faq />
       <Footer />
     </>
   );
 }
 
-export default Login;
+export default FAQ;

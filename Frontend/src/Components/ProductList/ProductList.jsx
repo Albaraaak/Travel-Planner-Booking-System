@@ -2,27 +2,29 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products.jsx";
-import { addToFavorites, removeFromFavorites, getFavorites } from "../UtilsFavorites.js";
+import {
+  addToFavorites,
+  removeFromFavorites,
+  getFavorites,
+} from "../UtilsFavorites.js";
 import "./ProductList.css";
 
 function ProductList() {
   const navigate = useNavigate();
 
   const [apiProducts, setApiProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Added for UX
-  const [error, setError] = useState(null); // Added for robustness
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showAvailable, setShowAvailable] = useState(false);
   const [favorites, setFavorites] = useState(getFavorites());
 
   useEffect(() => {
-    // Using an AbortController is a pro move to prevent memory leaks on unmount
     const controller = new AbortController();
 
     axios
       .get("http://localhost:3000/api/products", { signal: controller.signal })
       .then((res) => {
-        // Ensure you're targeting the correct nested data property from your Postman test
-        setApiProducts(res.data.data || []); 
+        setApiProducts(res.data.data || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -44,7 +46,7 @@ function ProductList() {
     date: p.date,
     rating: p.rating || 0,
     reviews: p.reviews || 0,
-    image: p.image || "https://via.placeholder.com/300", // Fallback image
+    image: p.image || "https://via.placeholder.com/300",
     available: p.available,
     discount: p.discount,
   }));
@@ -54,16 +56,25 @@ function ProductList() {
     : normalizedProducts;
 
   const handleFavorite = (product) => {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (!isLoggedIn) {
+      alert("Please login first to use favorites.");
+      navigate("/login");
+      return;
+    }
+
     const isFav = favorites.some((item) => item.id === product.id);
+
     if (isFav) {
       removeFromFavorites(product.id);
     } else {
       addToFavorites(product);
     }
+
     setFavorites(getFavorites());
   };
 
-  // UI RENDERING LOGIC
   if (loading) return <div className="loader">Exploring the world for you...</div>;
   if (error) return <div className="error-message">{error}</div>;
 
@@ -71,8 +82,9 @@ function ProductList() {
     <div className="product-list-section">
       <div className="product-list-header">
         <h2>Chase Your Dreams With Us!</h2>
-        <button 
-          className={`filter-btn ${showAvailable ? 'active' : ''}`}
+
+        <button
+          className={`filter-btn ${showAvailable ? "active" : ""}`}
           onClick={() => setShowAvailable((prev) => !prev)}
         >
           {showAvailable ? "✨ Showing Available" : "All Adventures"}
@@ -85,12 +97,13 @@ function ProductList() {
             const isFav = favorites.some((f) => f.id === product.id);
 
             return (
-              <div 
-                className="product-card-wrapper" 
+              <div
+                className="product-card-wrapper"
                 key={product.id}
                 onClick={() => navigate("/ProductDetails", { state: product })}
               >
-                <Products id={product._id}{...product} />
+                <Products id={product.id} {...product} />
+
                 <button
                   className={`fav-button ${isFav ? "is-fav" : ""}`}
                   onClick={(e) => {

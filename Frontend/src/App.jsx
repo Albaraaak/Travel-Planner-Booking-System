@@ -14,13 +14,23 @@ import CountryDetail from './Pages/CountryDetail.jsx'
 import Checkout from './Pages/Checkout.jsx'
 import EditProfile from './Pages/EditProfile.jsx'
 import ChangePassword from './Pages/ChangePassword.jsx'
-import {Routes,Route, BrowserRouter} from 'react-router-dom'
+import AdminDashboard from './Pages/AdminDashboard.jsx'
+import VerifyEmail from "./Pages/VerifyEmail.jsx";
+import ForgotPassword from "./Pages/ForgotPassword.jsx";
+import ResetPassword from "./Pages/ResetPassword.jsx";
+import Chatbot from './Components/Chatbot/Chatbot';
+import FAQ from "./Pages/FAQ.jsx";
+import {Routes,Route, BrowserRouter} from 'react-router-dom';
 
 function App(){
+ 
   return (
   <BrowserRouter>
   <Routes>
-      <Route  path="/" element={<Home />}/>
+    <Route  path="/" element={<Home />}/>
+    <Route path="/verify-email" element={<VerifyEmail />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
     <Route  path="/Destinations" element={<Destinations />}/>
     <Route  path="/Packages" element={<Packages />}/>
     <Route  path="/Favorites" element={<Favorites />}/>
@@ -34,9 +44,12 @@ function App(){
     <Route  path="/Profile" element={<Profile  />}/>
     <Route  path="/editprofile" element={<EditProfile />}/>
     <Route path="/changepassword" element={<ChangePassword />} />
+    <Route path="/admin/dashboard" element={<AdminDashboard />} />
+    <Route path="/Faq" element={<FAQ />} />
     <Route path="/Login" element={<Login />} />
     <Route  path="/SignUp" element={<SignUp />}/>
   </Routes>
+    <Chatbot />
   </BrowserRouter>
 );
 

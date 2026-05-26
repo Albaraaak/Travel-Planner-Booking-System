@@ -1,134 +1,201 @@
+
 .ticket-form {
-  background-color: #ffffff !important;
-  color: #111827;
-  margin: 48px auto 48px auto; /* Top & bottom spacing to prevent overlap */
-  padding: 40px 24px;
-  border-radius: 16px;
-  max-width: 1000px;
-  width: 90%;
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  padding: 40px;
+  background: #eef2f7;
+  text-align: center;
 }
 
-/* Heading & Description */
 .ticket-form h1 {
-  font-size: 1.9rem;
-  font-weight: 700;
+  font-size: 36px;
   color: #111827;
-  text-align: center;
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
 }
 
 .ticket-form > p {
-  color: #4b5563;
-  font-size: 1.05rem;
-  text-align: center;
-  margin: 0 0 36px 0;
-  line-height: 1.6;
+  color: #555;
+  margin-bottom: 25px;
 }
 
-/* Target inline-styled ticket divs */
-.ticket-form > div[style*="border"] {
-  all: unset;
-  display: block;
-  background: #ffffff !important;
-  border: 1px solid #e5e7eb !important;
-  border-radius: 12px !important;
-  padding: 22px !important;
-  margin: 0 0 18px 0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+.tickets-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
 }
 
-.ticket-form > div[style*="border"]:hover {
-  border-color: #d1d5db !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+.boarding-pass {
+  width: 900px;
+  max-width: 100%;
+  display: flex;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
 }
 
-/* Ticket info paragraphs */
-.ticket-form > div[style*="border"] p {
-  margin: 8px 0;
-  font-size: 0.98rem;
-  color: #374151;
+.ticket-main {
+  flex: 3;
 }
 
-.ticket-form > div[style*="border"] p b {
-  color: #1f2937;
-  font-weight: 600;
-  min-width: 85px;
-  display: inline-block;
+.ticket-header {
+  background: linear-gradient(135deg, #0f172a, #1e3a5f);
+  color: white;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-/* Price styling */
-.ticket-form > div[style*="border"] p:last-child {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #059669;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid #e5e7eb;
+.airline-logo {
+  width: 70px;
+  height: 70px;
+  border: 4px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
 }
 
-/* Book Button - Clean Blue */
-.ticket-form > div[style*="border"] button {
-  margin-top: 16px;
-  padding: 12px 24px;
+.ticket-header h2 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.ticket-header span {
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.ticket-body {
+  display: flex;
+  padding: 25px;
+  background:
+    linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+    url("https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+.barcode {
+  width: 75px;
+  height: 190px;
+  margin-right: 25px;
+  background: repeating-linear-gradient(
+    90deg,
+    #111 0px,
+    #111 3px,
+    transparent 3px,
+    transparent 7px
+  );
+}
+
+.ticket-info {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  text-align: left;
+}
+
+.ticket-info small {
+  color: #777;
+  font-size: 13px;
+}
+
+.ticket-info h3 {
+  margin: 5px 0 0;
+  font-size: 18px;
+  color: #111;
+  text-transform: capitalize;
+}
+
+.ticket-side {
+  flex: 1;
+  background: #fafafa;
+  border-left: 2px dashed #ccc;
+  padding: 24px;
+  text-align: left;
+  position: relative;
+}
+
+.ticket-side h3 {
+ color: #0f172a;
+  margin-bottom: 20px;
+}
+
+.ticket-side p {
+  margin: 10px 0;
+  color: #222;
+}
+.ticket-side button {
   width: 100%;
+  margin-top: 20px;
+  padding: 14px;
   border: none;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
   border-radius: 10px;
-  background: #2563eb;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
 }
 
-.ticket-form > div[style*="border"] button:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
+.ticket-side button:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.45);
 }
 
-.ticket-form > div[style*="border"] button:active {
-  transform: translateY(0);
+.ticket-side button:active {
+  transform: scale(0.97);
 }
 
-/* Empty State - Pure White */
-.ticket-form > p:not(:first-of-type) {
-  background: #ffffff !important;
-  color: #6b7280;
-  text-align: center;
-  padding: 32px 20px;
-  border: 2px dashed #e5e7eb;
-  border-radius: 12px;
-  margin: 20px 0 0 0;
-}
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .ticket-form {
-    margin: 32px auto;
-    padding: 28px 20px;
+  .boarding-pass {
+    flex-direction: column;
   }
-  .ticket-form h1 { font-size: 1.6rem; }
-  .ticket-form > p { font-size: 1rem; margin-bottom: 28px; }
-  .ticket-form > div[style*="border"] { padding: 18px !important; }
-  .ticket-form > div[style*="border"] p { font-size: 0.95rem; }
+
+  .ticket-side {
+    border-left: none;
+    border-top: 2px dashed #ccc;
+  }
+
+  .ticket-info {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-body {
+    flex-direction: column;
+  }
+
+  .barcode {
+    width: 100%;
+    height: 50px;
+    margin: 0 0 20px 0;
+  }
+}
+.ticket-form {
+  padding-top: 70px;
 }
 
-@media (max-width: 480px) {
-  .ticket-form {
-    margin: 24px auto;
-    padding: 24px 16px;
-    width: 95%;
-  }
-  .ticket-form h1 { font-size: 1.4rem; }
-  .ticket-form > div[style*="border"] { padding: 16px !important; }
-  .ticket-form > div[style*="border"] p:last-child { font-size: 1.15rem; }
+.boarding-pass {
+  width: 950px;
+  margin-bottom: 35px;
 }
 
-/* Focus/Accessibility */
-.ticket-form > div[style*="border"] button:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
+.ticket-header {
+  background: linear-gradient(135deg, #0f172a, #1e3a5f);
+}
+
+.ticket-side button {
+  background: #0f172a;
+}
+
+.ticket-side button:hover {
+  background: #1e293b;
 }

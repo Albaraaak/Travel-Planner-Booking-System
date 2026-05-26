@@ -1,0 +1,115 @@
+.chatbot-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  z-index: 9999;
+}
+
+.chatbot-box {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 360px;
+  height: 520px;
+  background: rgba(7,17,31,0.96);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 26px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+.chatbot-header {
+  padding: 18px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+}
+
+
+.chatbot-messages {
+  flex: 1;
+  padding: 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+} 
+
+.user-message,
+.bot-message {
+  padding: 12px 14px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  max-width: 80%;
+}
+
+.user-message {
+  margin-left: auto;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+  line-height: 1.6;
+}
+.bot-message {
+  background: rgba(255,255,255,0.09);
+  color: white;
+  line-height: 1.7;
+  white-space: pre-line;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.chatbot-input {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+}
+
+.chatbot-input input {
+  margin: 0;
+}
+.expanded {
+  width: 700px !important;
+  height: 85vh !important;
+}
+
+.expand-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.chatbot-header {
+  padding: 18px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.support-inbox-btn {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.support-inbox-btn:hover {
+  background: rgba(255,255,255,0.25);
+}

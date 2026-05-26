@@ -1,45 +1,24 @@
-/* const bcrypt = require('bcrypt');
-const User = require("../models/User");
-
-const loginUser = async ( username, password ) => {
-    try {
-        console.log(username,password)
-         const user = await User.findOne({ username: username });
-        if (!user) {
-            throw new Error("User not found");
-        }
-        
-        const isMatch = await bcrypt.compare(password, user.password);
-        
-        if (!isMatch) {
-            throw new Error('Incorrect password');
-        }
-
-        return user;
-    } catch (err) {
-       throw new Error('Error during login: ' + err.message);
-    }
-};
-module.exports = {loginUser};
-*/ const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const loginUser = async (username, password) => {
-    console.log(username, password);
+  const user = await User.findOne({ username });
 
-    const user = await User.findOne({ username: username });
+  if (!user) {
+    throw new Error("User not found");
+  }
 
-    if (!user) {
-        throw new Error("User not found");
-    }
+  if (!user.isVerified) {
+    throw new Error("Please verify your email before login");
+  }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-        throw new Error("Incorrect password");
-    }
+  if (!isMatch) {
+    throw new Error("Incorrect password");
+  }
 
-    return user;
+  return user;
 };
 
-module.exports = { loginUser }; 
+module.exports = { loginUser };

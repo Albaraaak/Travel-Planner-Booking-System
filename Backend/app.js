@@ -27,7 +27,14 @@ app.use("/api/bookings",bookingRoute);
 const ticketRoute = require("./routes/ticketRoute");
 app.use("/api/tickets", ticketRoute );
 
+const adminRoute = require('./routes/adminRoute');
+app.use('/api/admin', adminRoute);
 
+ const adminUserRoute = require("./routes/adminUserRoute");
+app.use("/api/admin/users", adminUserRoute);
+
+const supportRoute = require("./routes/supportRoute");
+app.use("/api/support", supportRoute);
 
 const PORT = 3000;
 

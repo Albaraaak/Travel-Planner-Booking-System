@@ -1,33 +1,51 @@
-const jwt = require('jsonwebtoken');
-const { loginUser } = require('../Services/authService');
+const jwt = require("jsonwebtoken");
+const { loginUser } = require("../Services/authService");
 
 const loginController = async (req, res) => {
-    const {username,password} = req.body;
+  const { username, password } = req.body;
 
-    try {
-        const user = await loginUser(username,password);
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  try {
+    const user = await loginUser(username, password);
 
-     res.cookie('token', token, {
-    httpOnly: false,   // 👈 IMPORTANT for Postman testing
-    sameSite: 'Lax',   // 👈 allows Postman to accept it
-    maxAge: 3600000,
-    secure: false,
-    path: "/"
-});
-        res.status(200).json({ userId: user._id });
-    } catch (err) {
-        res.status(401).json({ 
-            message: "Intenal error occured",
-            details: {
-                error: err.message,
-                info: err.details
-            }
-        });
-    }
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: false,
+      sameSite: "Lax",
+      maxAge: 3600000,
+      secure: false,
+      path: "/",
+    });
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        location: user.location,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    res.status(401).json({
+      message: "Internal error occurred",
+      details: {
+        error: err.message,
+        info: err.details,
+      },
+    });
+  }
 };
 
-
 module.exports = {
-    loginController
-}
+  loginController,
+};
