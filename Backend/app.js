@@ -36,6 +36,9 @@ app.use("/api/admin/users", adminUserRoute);
 const supportRoute = require("./routes/supportRoute");
 app.use("/api/support", supportRoute);
 
+const chatbotRoute = require("./routes/chatbotRoute");
+app.use("/api/chatbot", chatbotRoute);
+
 const PORT = 3000;
 
 
