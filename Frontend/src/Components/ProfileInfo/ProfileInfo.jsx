@@ -24,15 +24,33 @@ function ProfileInfo() {
     if (savedUser) {
       setUser(savedUser);
     }
+    const fetchBookings = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-    const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    setBookings(savedBookings);
+    const res = await fetch("http://localhost:3000/api/bookings", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+    });
+
+    const result = await res.json();
+
+    setBookings(result.data || []);
+  } catch (err) {
+    console.log("Failed to fetch bookings:", err);
+  }
+};
+
+fetchBookings();
+    
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("loggedIn");
+   sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
 
     alert("Logged out successfully ✅");
     navigate("/");

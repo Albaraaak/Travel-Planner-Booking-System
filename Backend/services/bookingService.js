@@ -32,8 +32,8 @@ const createBooking = async (productId, userId, nbOfPeople) => {
   return booking;
 };
 
-const getBookings = async () => {
-  return await Booking.find()
+const getBookings = async (userId) => {
+  return await Booking.find({ user: userId })
     .populate("user", "username email phoneNumber")
     .populate("product");
 };

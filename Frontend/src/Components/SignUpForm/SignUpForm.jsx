@@ -9,6 +9,7 @@ function SignUpForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setphoneNumber] = useState("");
   const [message, setmessage] = useState("");
 
@@ -17,10 +18,23 @@ function SignUpForm() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setmessage("Passwords do not match");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/users/signup",
-        { firstName, lastName, username, email, password, phoneNumber },
+        {
+          firstName,
+          lastName,
+          username,
+          email,
+          password,
+          confirmPassword,
+          phoneNumber,
+        },
         { withCredentials: true }
       );
 
@@ -87,9 +101,26 @@ function SignUpForm() {
           required
         />
 
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          placeholder="Confirm your password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+
+        {confirmPassword && (
+          <p className={password === confirmPassword ? "success-message" : "error-message"}>
+            {password === confirmPassword
+              ? "Passwords match"
+              : "Passwords do not match"}
+          </p>
+        )}
+
         <label>Phone Number</label>
         <input
-          type="number"
+          type="tel"
           placeholder="Enter your phone number"
           value={phoneNumber}
           onChange={(e) => setphoneNumber(e.target.value)}

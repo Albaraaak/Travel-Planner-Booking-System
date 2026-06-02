@@ -40,7 +40,7 @@ const createBookingController = async (req, res) => {
 // GET ALL
 const getBookingsController = async (req, res) => {
   try {
-    const result = await getBookings();
+    const result = await getBookings(req.user.id);
 
     res.status(200).json({
       success: true,
@@ -53,7 +53,7 @@ const getBookingsController = async (req, res) => {
     });
   }
 };
-
+ 
 // GET BY ID
 const getBookingByIdController = async (req, res) => {
   try {

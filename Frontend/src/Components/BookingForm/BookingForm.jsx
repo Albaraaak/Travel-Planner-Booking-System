@@ -7,8 +7,7 @@ function BookingForm() {
   const nav = useNavigate();
   const location = useLocation();
 
-  const { title, image, country, id } =
-    location.state || {};
+  const { title, image, country, id } = location.state || {};
 
   const [guests, setGuests] = useState(1);
 
@@ -21,37 +20,52 @@ function BookingForm() {
       if (!guests || guests < 1) {
         alert("Please enter number of guests!");
         return;
-      }if (!id) {
-      alert("Missing product. Please go back and try again.");
-      return;
-    }
+      }
+
+      if (!id) {
+        alert("Missing product. Please go back and try again.");
+        return;
+      }
 
       const token = localStorage.getItem("token");
 
-      await axios.post(
+      if (!token) {
+        alert("Please login first.");
+        nav("/login");
+        return;
+      }
+
+      const response = await axios.post(
         `http://localhost:3000/api/bookings/order/${id}`,
         { nbOfPeople: guests },
         {
-          withCredentials:true,
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        
+          withCredentials: true,
+        }
       );
 
       alert("Booking successful!");
 
-      // go to bookings page
-      nav("/checkout");
-
+      nav("/checkout", {
+        state: {
+          booking: response.data.data,
+          title,
+          image,
+          country,
+          guests,
+        },
+      });
     } catch (error) {
-  console.log("FULL ERROR:", error);
-  console.log("RESPONSE:", error.response);
-  alert(error.response?.data?.message || "Booking failed");
-}
+      console.log("FULL ERROR:", error);
+      console.log("RESPONSE:", error.response);
+      alert(error.response?.data?.message || "Booking failed");
+    }
   };
 
   return (
     <div className="booking-container">
-
       <button className="btn" onClick={() => nav(-1)}>
         ⬅ Back
       </button>
@@ -68,15 +82,11 @@ function BookingForm() {
             onChange={(e) => setGuests(Number(e.target.value))}
           />
 
-          <button
-            className="btn primary"
-            onClick={handleConfirm}
-          >
+          <button className="btn primary" onClick={handleConfirm}>
             Confirm Booking
           </button>
         </div>
       </div>
-
     </div>
   );
 }
